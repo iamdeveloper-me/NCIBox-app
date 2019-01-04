@@ -1,0 +1,9 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<div [innerHTML]="this.stateService.hotelInstructionText" class="container-fluid nci-content">
+</div>
+<button type="button" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+  {{ 'btnNextInstructions' | translate }}
+</button>
+
+<app-page-footer></app-page-footer>

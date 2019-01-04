@@ -1,0 +1,58 @@
+<div class="div-title-big">
+  <h1 style="font-size: 25px;"> {{'Welcome' | translate }}</h1>
+</div>
+
+<div style="float:right">
+    <p>V-1.0.1</p>
+</div>
+
+
+<p style="text-align: center;margin:0px;">{{'Choose' | translate }}</p>
+    
+<div >
+<button *ngIf="this.isWantRoom" class="nci-btn-big nci-btn-highlight"   (click)="this.onWantRoomClick()">
+        {{ 'wantRoom' | translate }}
+  </button>
+  
+  <button *ngIf="this.settingsService.settings.checkInByBookingCode === '-1'" class="nci-btn-big nci-btn-highlight" (click)="this.onHaveRoomClick()">
+      {{ 'haveRoom' | translate }}
+      <br>
+  </button>
+  
+  <button *ngIf="this.settingsService.settings.pinRecovery === '-1'" class="nci-btn-big nci-btn-highlight" (click)="onPinRecovery()">
+      {{ 'pinRecovery' | translate }}
+      <br>
+  </button>
+</div>
+
+
+
+
+<div class="row">
+
+
+  <div class="col-xs-2" *ngFor="let language of this.settingsService.settings.Langruages" (click)="changeLang(language.Abbreviation,language.LangId)">
+      
+    <img class="flag-img" *ngIf="this.settingsService.images[language.Abbreviation]" [src]="'data:image/jpeg;base64,' + this.settingsService.images[language.Abbreviation] | safeHtml" />
+    
+    <!-- <img class="flag-img" src="assets/{{language.Abbreviation}}.png" /> -->
+  </div>
+
+
+  <!-- <div class="col-xs-2" (click)="changeLang('EN','2')">
+      <img class="flag-img" src="assets/007-united-kingdom.png" />
+  </div>
+  <div class="col-xs-2" (click)="changeLang('FR','3')">
+      <img class="flag-img" src="assets/006-france.png" />
+  </div>
+  <div class="col-xs-2" (click)="changeLang('IT','4')">
+      <img class="flag-img" src="assets/003-italy.png" />
+  </div>
+  <div class="col-xs-2" (click)="changeLang('ES','5')">
+      <img class="flag-img" src="assets/002-spain.png" />
+  </div>
+  <div class="col-xs-2" (click)="changeLang('RU','6')">
+      <img class="flag-img" src="assets/004-russia.png" />
+  </div> -->
+
+</div>

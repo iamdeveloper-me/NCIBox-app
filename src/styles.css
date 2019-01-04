@@ -1,0 +1,151 @@
+body {
+  background-color: #434141;
+  color: lightgray;
+  font-family: 'Montserrat', sans-serif;
+  font-size: calc(16px + 0.5vh);
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+p {
+  padding-left: 5vw;
+  padding-right: 5vw;
+}
+
+
+.error {
+  color: red;
+  font-size: calc(18px + 0.3vh);
+  text-align:right;
+  font-weight: bold;
+  position: absolute;
+  bottom: 100px;
+  right: 380px;
+}
+
+label {
+  font-size: 20px;
+  font-weight: 300;
+}
+
+input {
+  font-size: 16px;
+  color: black;
+}
+
+.row
+{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.container-fluid
+{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+
+/* content are for screens with header and footer*/
+.nci-content {
+  margin-top: 20px;
+  height: calc(100vh - 172px);
+  margin-left:15px;
+  margin-right:15px;
+}
+
+
+/* big titles*/
+.div-title-big {
+    width: auto;
+    font-family: 'Roboto', sans-serif;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+
+.div-title-big h1 {
+    font-size: calc(24px + 2vh);
+    font-weight: bolder;
+}
+
+.nci-btn-big {
+  height: 15vh;
+  width: 40%;
+  min-width: 300px;
+  min-height: 90px;
+  display: block;
+  margin: 30px auto;
+  font-size: calc(20px + 0.3vh);
+  color: #E8E8E5;
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.nci-btn-next {
+    height: 85px;
+    min-width: 300px;
+    font-size: calc(20px + 0.3vh);
+    color: #E8E8E5;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.nci-btn-highlight {
+  border: 4px solid  #34B66B;
+  background-color: transparent;
+}
+
+.nci-btn-medium {
+  height: 75px;
+  width: 20%;
+  background-color: transparent;
+  min-width: 200px;
+  font-size: calc(20px + 0.3vh);
+  color: #E8E8E5;
+  font-family: 'Montserrat', sans-serif;
+  border: transparent;
+  border-right: 4px #95989A solid
+}
+
+.nci-btn-small {
+  height: 80px;
+  width: 20%;
+  background-color: transparent;
+  min-width: 150px;
+  font-size: calc(18px + 0.3vh);
+  /*color: #5A5A5B;*/
+  font-family: 'Montserrat', sans-serif;
+  border: 4px #95989A solid;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 0 0 10px 5px;
+}
+
+.label-switch {
+  font-size: calc(11px + 0.5vh);
+}
+
+.row-switch {
+  margin-left: 40px;
+  margin-bottom: 10px;
+  text-align:right;
+}
+
+.room_div {
+    width: 26%;
+    background-color: #6d6a6a;
+    border-color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    margin: 20px;
+}
+
+.room_div_button {
+    margin: 10px;
+}
+

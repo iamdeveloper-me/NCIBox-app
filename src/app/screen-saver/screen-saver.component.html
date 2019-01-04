@@ -1,0 +1,6 @@
+<div id="cf">
+    <img width={{this.width}} height={{this.height}} (click)="onScreenClick()" *ngFor="let image of this.settingsService.images.hotelPictures" [src]="'data:image/jpeg;base64,' + image | safeHtml" />
+</div>
+<div class="div-title-big" (click)="onScreenClick()">
+    <h1>Touch the screen to get a room</h1>
+</div>

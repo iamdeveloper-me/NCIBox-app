@@ -1,0 +1,146 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="guestsForm" name="userForm">
+  <div class="container-fluid nci-content">
+    <p>
+      {{ 'enterGuestsDetails' | translate }}
+    </p>
+    <div class="error" *ngIf="isError">{{ 'noAllGuestsData' | translate }}</div>
+    <div class="error" *ngIf="customBookingError">{{ customBookingError }}</div>
+
+    <div class="row" *ngIf="isShowing(1)">
+      <div class="col-xs-6">
+        <label>{{ 'firstName' | translate }}</label>
+        <input class="form-control" id="firstName" formControlName="firstName" type="text" autocomplete="off" (click)="onInputClick($event, 1)" />
+      </div>
+      <div class="col-xs-6">
+        <label>{{ 'lastName' | translate }}</label>
+        <input class="form-control" id="lastName" formControlName="lastName" type="text" autocomplete="off" (click)="onInputClick($event, 1)" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(2)">
+      <div class="col-xs-7">
+        <label>{{ 'address' | translate }}</label>
+        <input class="form-control" id="address" formControlName="address" type="text" autocomplete="off" (click)="onInputClick($event,2)" />
+      </div>
+
+      <div class="col-xs-5">
+        <label>{{ 'idNo' | translate }}</label>
+        <input class="form-control" id="idNumber" formControlName="idNumber" type="text" autocomplete="off" (click)="onInputClick($event,2)" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(3)">
+      <div class="col-xs-4">
+        <label>{{ 'postCode' | translate }}</label>
+        <input class="form-control" id="postCode" formControlName="postCode" type="text" autocomplete="off" (click)="onInputClick($event,3)" />
+      </div>
+      <div class="col-xs-4">
+        <label>{{ 'city' | translate }}</label>
+        <input class="form-control" id="city" formControlName="city" type="text" autocomplete="off" (click)="onInputClick($event,3)" />
+      </div>
+      <div class="col-xs-4">
+        <label>{{ 'country' | translate }}</label>
+        <br/>
+        <div class="input-group">
+          <input class="form-control" formControlName="country" readonly="readonly" />
+          <span class="input-group-addon" onclick="document.getElementById('id01').style.display='block'" style="cursor:pointer">{{ 'selectLang' | translate }}</span>
+        </div>
+        <!-- <button style="background-color: transparent;
+        border: 4px solid #34B66B;
+        height: 45px;
+        border-radius: 4px;
+        margin-left: 32%;
+        margin-top: 10px;" onclick="document.getElementById('id01').style.display='block'" class="w3-button selCoun_btn">Select Country</button> -->
+        <!-- <select class="form-control" value="Germany" formControlName="country">
+          <option value="">-- Select a Country --</option>
+          <option [value]="country"  *ngFor="let country of this.countryService.Countries">
+            {{country}}
+          </option>
+        </select> -->
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(4)">
+      <p class="optional">
+        {{ 'optional' | translate }}
+      </p>
+      <div class="col-xs-6">
+        <label>{{ 'email' | translate}}</label>
+        <input class="form-control" id="email" formControlName="email" type="text" autocomplete="off" (click)="onInputClick($event,4)" />
+      </div>
+      <div class="col-xs-6">
+        <label>{{ 'mobile' | translate }}</label>
+          <div class="input-group">
+              <span class="input-group-addon">+</span>
+              <input class="form-control" id="mobile" maxlength="25" formControlName="mobile" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" type="text" autocomplete="off" (click)="onInputClick($event,4)" />
+          </div> 
+        </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(5) && this.settingsService.settings.pinRecovery === '-1'">
+      <div class="col-xs-6">
+        <label>{{ 'booking_password_recovery' | translate}}</label>
+        <input class="form-control" id="password" formControlName="password" type="text" autocomplete="off" (click)="onInputClick($event,5)" />
+      </div>
+    </div>
+
+    <div [hidden]="!isTermsAndConditions" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" formControlName="termsCondition" id="termsCondition" type="checkbox" id="checkbox" 
+          style="width: 15px;margin-left: 15px;" /> 
+        <label>{{'please_accept' | translate }}</label>
+        <label style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" onmouseover="">
+          {{'termsAndConditions' | translate }}
+        </label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept1" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept1" type="checkbox" (change)="toggleEditable($event)"
+          style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept1' | translate }}</label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept2" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept2" type="checkbox" (change)="toggleEditable($event)"
+          style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept2' | translate }}</label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept3" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept3" type="checkbox" (change)="toggleEditable($event)"
+          style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept3' | translate }}</label>
+      </div>
+    </div>
+
+  
+    <div class="row">
+      <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+    </div>
+
+    <!-- <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" [disabled]="!guestsForm.form.valid" (click)="onNextClick()">
+      {{nextCaption}}
+    </button> -->
+    <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+      {{nextCaption}}
+    </button>
+  </div>
+</form>
+
+<app-page-footer></app-page-footer>
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <button class="btn lang_btn" *ngFor="let country of this.countryService.Countries" (click)="setCountry(country)"> {{country}} </button>
+      </div>
+    </div>
+</div>

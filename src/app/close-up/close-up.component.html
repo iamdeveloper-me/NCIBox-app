@@ -1,0 +1,93 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+<div class="container-fluid nci-content">
+  <p>{{ 'successfully' | translate}} <span class="emphasized">{{ 'thankYou' | translate }}</span></p>
+  <br />
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <p class="smaller" *ngIf="isShowing(0)">{{ 'importantInfo' | translate }}</p>
+      <p class="smaller" *ngIf="isShowing(0)">{{ 'weCanSend' | translate }}</p>
+      <div *ngIf="emailEnabled && isShowing(1)">
+        <div class="row row-switch" >
+          <label class="label-switch">{{ 'sendByEmail' | translate }}</label>
+          <bSwitch [switch-base-class]="'bootstrap-switch'"
+                   [switch-wrapper-class]="'bootstrap-switch-wrapper'"
+                   [switch-off-text]="getNo()"
+                   [switch-on-text]="getYes()"
+                   [switch-on-color]="'success'"
+                   [switch-off-color]="'default'"
+                   [switch-size]="'small'"
+                   [switch-disabled]="false"
+                   [switch-readonly]="false"
+                   [switch-animate]="true"
+                   [switch-inverse]="false"
+                   [switch-handle-width]="50"
+                   [(ngModel)]="sendMail"
+                   (onChangeState)="onSendEmailChange($event)">
+          </bSwitch>
+        </div>
+        <div class="row row-switch" *ngIf="sendMail">
+          <label class="label-switch">{{ 'to' | translate }}</label>
+          <input type="text" id="emailForData" [(ngModel)]="emailForData" (click)="onInputClick($event, 1)" />
+        </div>
+        
+        <div class="row row-switch" *ngIf="sendMail">
+          <button type="button" class="btn mail_btn" (click)="onSendEmail($event)" >
+            {{'sendMail' | translate }}
+          </button>
+        </div>
+      </div>
+      <div *ngIf="smsEnabled && isShowing(2)">
+        <div class="row row-switch" >
+          <label class="label-switch">{{ 'sendBySMS' | translate }}</label>
+          <bSwitch [switch-base-class]="'bootstrap-switch'"
+                   [switch-wrapper-class]="'bootstrap-switch-wrapper'"
+                   [switch-off-text]="getNo()"
+                   [switch-on-text]="getYes()"
+                   [switch-on-color]="'success'"
+                   [switch-off-color]="'default'"
+                   [switch-size]="'small'"
+                   [switch-disabled]="false"
+                   [switch-readonly]="false"
+                   [switch-animate]="true"
+                   [switch-inverse]="false"
+                   [switch-handle-width]="50"
+                   [(ngModel)]="sendSMS"
+                   (onChangeState)="onSendSMSChange($event)">
+          </bSwitch>
+        </div>
+        <div class="row row-switch" *ngIf="sendSMS && isShowing(2)">
+          <label class="label-switch">{{ 'to' | translate }}</label>
+          <input type="text" id="mobileForData" [(ngModel)]="mobileForData" (click)="onInputClick($event, 2)" />
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6" *ngIf="isShowing(0)">
+        <p class="smaller">{{ 'you_booked_from' | translate }} <span class="date">{{checkIn}} </span> {{'booked_to' | translate}} <span class="date">{{checkOut}} </span></p>
+        <p class="smaller">{{ 'your_booking_code' | translate }} <span class="important"> {{booking.bookingCode}}</span></p>
+        
+        <p  class="smaller">{{ 'yourPIN' | translate }} <span class="important"> {{booking.pin}}</span></p>
+        
+        <p class="smaller">{{ 'withYourPIN' | translate }}</p>
+        <p class="smaller">{{ 'yourRoom' | translate }} <span class="important">{{booking.roomName}}, </span>{{ 'findRoom' | translate }} <span class="important"> {{booking.section}} </span></p>
+        <p class="smaller">{{ 'booking_you_can_enter_text' | translate }} <span class="important">{{booking.commonDoors}}</span></p>
+        <p class="smaller" *ngFor="let location of booking.location" > {{ location }}</p>
+    </div>
+  </div>
+
+  <div class="row">
+    <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+  </div>
+
+  <div style="right: 45%;" class="error" *ngIf="customBookingError">{{ customBookingError }}</div>
+
+  <button *ngIf="isShowing(0)" type="button" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+    {{ 'btnNextCloseUp' | translate }}
+  </button>
+
+</div>
+
+<app-page-footer></app-page-footer>
+

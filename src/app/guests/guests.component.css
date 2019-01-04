@@ -1,0 +1,44 @@
+input {
+  width: 100%;
+}
+
+.row {
+  margin-bottom:2px;
+}
+
+label {
+  font-size:14px;
+  margin:0;
+}
+
+.optional {
+  padding-right:0;
+  padding-left:2vw;
+  padding-top:2vw;
+  font-size:14px;
+  margin:0;
+}
+.lang_btn{
+  background-color: #fafafa;
+  border: 1px solid #34B66B;
+  margin: 2px;
+  height: 30px;
+  width: 250px;
+  color: #222;
+}
+
+.lang_btn:hover {
+    background-color: #34B66B;
+    color: #fafafa;
+}
+
+.w3-container{
+    overflow-y: scroll;
+    width: 560px;
+    height: 400px;
+    overflow-x: hidden;
+}
+
+.w3-modal-content {
+  width: 560px;
+}

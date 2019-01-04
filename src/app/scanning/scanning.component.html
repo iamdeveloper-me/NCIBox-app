@@ -1,0 +1,54 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="form" >
+    <button class="nci-btn-big nci-btn-highlight" (click)="startScaning()">
+        {{ 'startScaning' | translate }}
+    </button>
+
+    <!-- <div [hidden]="!isTermsAndConditions" class="row">
+        <label>
+            <input class="form-control"  type="checkbox" id="checkbox"  style="width: 13px;margin-top: 10px;margin-left: 15px;"
+            /> {{'please_accept' | translate }}
+            <span style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" onmouseover="">{{'termsAndConditions' | translate }}</span>
+        </label>
+
+    </div> -->
+
+    <div [hidden]="!isTermsAndConditions" class="col-xs-12">
+        <div class="form-inline">
+            <input class="form-control" formControlName="termsCondition" type="checkbox" id="checkbox"style="width: 15px;margin-left: 15px;"  (change)="toggleEditable($event)"/> 
+            <label>{{'please_accept' | translate }}</label>
+            <label style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" onmouseover="">
+            {{'termsAndConditions' | translate }}
+            </label>
+        </div>
+    </div>
+
+    <div [hidden]="!isAccept1" class="col-xs-12">
+        <div class="form-inline">
+            <input class="form-control" id="Accept1" (change)="toggleEditable($event)" type="checkbox" style="width: 15px; margin-left: 15px;" /> 
+            <label>{{'Accept1' | translate }}</label>
+        </div>
+    </div>
+
+    <div [hidden]="!isAccept2" class="col-xs-12">
+        <div class="form-inline">
+            <input class="form-control" id="Accept2" (change)="toggleEditable($event)" type="checkbox" style="width: 15px; margin-left: 15px;" /> 
+            <label>{{'Accept2' | translate }}</label>
+        </div>
+    </div>
+
+    <div [hidden]="!isAccept3" class="col-xs-12">
+        <div class="form-inline">
+            <input class="form-control" id="Accept3" (change)="toggleEditable($event)" type="checkbox" style="width: 15px; margin-left: 15px;" /> 
+            <label>{{'Accept3' | translate }}</label>
+        </div>
+    </div>
+
+
+    <button type="button" class="nci-btn-next nci-btn-highlight" (click)="startScaning()">
+        {{nextCaption}}
+    </button>
+</form>
+
+<app-page-footer></app-page-footer>

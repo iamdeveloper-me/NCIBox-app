@@ -1,0 +1,71 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="form" (window:resize)="beResponsive()">
+
+  <div class="sig-container" #sigContainer1>
+    <div fxLayout="row">
+      <signature-field formControlName="signatureField1"></signature-field>
+    </div>
+    <div fxLayout="row">
+      <button type="button" class="button_clear" (click)="signBox.clear()" [disabled]="!form.controls.signatureField1.valid">{{ 'Clear' | translate }}</button>
+    </div>
+  </div>
+
+  <!-- <div [hidden]="!isTermsAndConditions" class="row">
+    <label>
+      <input type="checkbox" class="form-control"  id="termsCondition" (change)="toggleEditable($event)" style="width: 13px;margin-top: 10px;margin-left: 15px;"
+      /> {{'please_accept' | translate }}
+      <span style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" >{{'termsAndConditions' | translate }}</span>
+    </label>
+  </div> -->
+  <div [hidden]="!isTermsAndConditions" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" formControlName="termsCondition" id="termsCondition" type="checkbox" id="checkbox" (change)="toggleEditable($event)"
+          style="width: 15px;margin-left: 15px;" /> 
+        <label>{{'please_accept' | translate }}</label>
+        <label style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" onmouseover="">
+          {{'termsAndConditions' | translate }}
+        </label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept1" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept1" type="checkbox" (change)="toggleEditable($event)" style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept1' | translate }}</label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept2" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept2" type="checkbox" (change)="toggleEditable($event)" style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept2' | translate }}</label>
+      </div>
+    </div>
+
+    <div [hidden]="!isAccept3" class="col-xs-12">
+      <div class="form-inline">
+        <input class="form-control" id="Accept3" type="checkbox" (change)="toggleEditable($event)" style="width: 15px; margin-left: 15px;" /> 
+        <label>{{'Accept3' | translate }}</label>
+      </div>
+    </div>
+
+    <div class="error" *ngIf="customBookingError">{{ customBookingError }}</div>
+
+
+  <button type="button" [disabled]="!form.controls.signatureField1.valid" class="nci-btn-next nci-btn-highlight" (click)="submit()">
+    {{nextCaption}}
+  </button>
+</form>
+
+
+
+<!-- <div class="container-fluid nci-content">
+  <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()"></signature-pad>
+
+  <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+    {{nextCaption}}
+  </button>
+</div> -->
+
+<app-page-footer></app-page-footer>

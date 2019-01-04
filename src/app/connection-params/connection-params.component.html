@@ -1,0 +1,35 @@
+<div class="container-fluid nci-content">
+  <div class="error" *ngIf="noConn">Cannot connect to given host! Please, check params and host availability.</div>
+  <br>
+  <div class="param-content">
+    <div class="row">
+      <div class="col-xs-3">
+        <label>Host</label>
+      </div>
+      <div class="col-xs-9">
+        <input type="text" [(ngModel)]="IP" />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-3">
+        <label>Port</label>
+      </div>
+      <div class="col-xs-9">
+        <input type="text" [(ngModel)]="Port" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-3">
+        <label>Password</label>
+      </div>
+      <div class="col-xs-9">
+        <input type="text" [(ngModel)]="Password" />
+      </div>
+    </div>
+    <p></p>
+    <div class="row">
+      <button (click)="tryConnect()">Connect</button>
+    </div>
+  </div>
+</div>

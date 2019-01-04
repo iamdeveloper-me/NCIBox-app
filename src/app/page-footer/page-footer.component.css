@@ -1,0 +1,16 @@
+.nci-footer {
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  height: 60px;
+  width: 100%;
+  display: flex;
+}
+
+button[disabled] {
+  color: #5A5A5B;
+}
+
+.progressBar {
+  margin: auto;
+}

@@ -1,0 +1,63 @@
+<div class="row nci-header">
+    <button class="nci-btn-medium"  (click)="onBackClick()">{{ 'Back' | translate }} </button>
+    <h1>{{ 'chooseCategory' | translate }}</h1>
+      <div class="curr-time">
+          {{ date }}
+      </div>
+  </div>
+  <hr class="nci-hr" />
+
+<div class="container-fluid nci-content">
+
+
+  <p *ngIf="!isNoRoom">
+    {{'choose your category' | translate }}
+  </p>
+  <p class="page" *ngIf="!isNoRoom">
+    {{showing}}
+  </p>
+  <div class="error" *ngIf="isNoRoom">{{'noRoomError' | translate }}</div>
+  <div class="error" *ngIf="customBookingError">{{ customBookingError }}</div>
+
+  <div class="row">
+    <div class="col-sm-1 item-col circle-col">
+      <button *ngIf="!prevDisabled" class="circle" (click)="onPrevPage()"><</button>
+    </div>
+
+    <div class="col-sm-10 item-col">
+      <div class="row item-row">
+        <div class="col-sm-4 item-col room_div" *ngFor="let cat of categories">
+          <div class="category" (click)="selectCategory(cat.name)">
+            <div class="row item-header">
+              <div [class.item-selected]="cat.name===selectedCategory">{{cat.name}}</div>
+            </div>
+            <div class="row item-img">
+              <img class="cat-img" [src]="'data:image/jpeg;base64,' + cat.img | safeHtml" />
+              <!-- <div class="item-click">{{'imageClick' | translate }}</div> -->
+            </div>
+            <div class="row item-amount room_div_button">
+              {{cat.price | number:'.2-2' }}€/{{'night'|translate}}
+            </div>
+          </div>
+          <div *ngIf="this.settingsService.settings.searchByRoom === '-1'"  class="row item-amount">
+            <button type="button" class="btn room_div_button" (click)="showRoomsClick(cat.name)" >
+              {{'showRooms' | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div  class="col-sm-1 item-col circle-col">
+      <button *ngIf="!nextDisabled" class="circle" (click)="onNextPage()">></button>
+    </div>
+  </div>
+
+  <div class="error" *ngIf="isError">{{ 'noSelection' | translate }}</div>
+  <button type="button" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+    {{ buttonCaption }}
+  </button>
+
+</div>
+
+<app-page-footer></app-page-footer>

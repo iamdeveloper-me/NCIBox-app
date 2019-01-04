@@ -1,0 +1,34 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<div class="container-fluid nci-content">
+
+  <p>
+    {{'enterCode' | translate }}
+  </p>
+  <div class="error" *ngIf="isError">{{ 'noCode' | translate }}</div>
+  <div class="error" *ngIf="isNoReservation">{{ 'noReservation' | translate }}</div>
+  <br>
+  <form [formGroup]="reservationCodeForm">
+    <div class="row reservationform">
+      <div class="col-sm-8">
+        <label for="reservationCode">{{'reservationCode' | translate}}</label>
+        <div>
+          <input id="reservationCode" formControlName="reservationCode" type="text" (click)="onInputClick($event, 1)" />
+        </div>
+      </div>
+
+    </div>
+    </form>
+
+    <div class="row">
+      <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+    </div>
+
+    <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+      {{'btnNextReservation' | translate }}
+    </button>
+
+
+</div>
+
+<app-page-footer></app-page-footer>

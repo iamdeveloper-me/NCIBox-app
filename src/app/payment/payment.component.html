@@ -1,0 +1,161 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="paymentForm">
+  <div class="container-fluid nci-content">
+    <p>
+      {{'paymentDetails' | translate }}
+    </p>
+    <div class="error" *ngIf="isError">{{ 'noPaymentData' | translate }}</div>
+    <div class="error" *ngIf="customBookingError">{{ customBookingError }}</div>
+
+
+    <div class="row">
+
+      <div class="col-sm-6 payment-column" >
+        <div *ngIf="isShowing(0)">
+          <div class="row align-right">
+            1 x {{ selectedCat }}
+          </div>
+          <div class="row align-right">
+            x {{ noNights }} night(s)
+          </div>
+          <hr />
+          <div class="row align-right amount">
+            = {{ amount }}€
+          </div>
+          <br />
+          <div class="row row-switch" *ngIf="isShowing(1)">
+            <label class="label-switch">{{ 'billToCompany' | translate }}</label>
+            <bSwitch [switch-base-class]="'bootstrap-switch'"
+                     [switch-wrapper-class]="'bootstrap-switch-wrapper'"
+                     [switch-off-text]="getNo()"
+                     [switch-on-text]="getYes()"
+                     [switch-on-color]="'success'"
+                     [switch-off-color]="'default'"
+                     [switch-size]="'small'"
+                     [switch-disabled]="false"
+                     [switch-readonly]="false"
+                     [switch-animate]="true"
+                     [switch-inverse]="false"
+                     [switch-handle-width]="50"
+                     [(ngModel)]="billToCompany"
+                     [ngModelOptions]="{standalone: true}"
+                     (onChangeState)="onBillToCompanyChange($event)">
+            </bSwitch>
+          </div>
+        </div>
+
+        <div class="row row-switch" *ngIf="emailEnabled && isShowing(1)">
+          <label class="label-switch">{{ 'invoiceByEmail' | translate }}</label>
+          <bSwitch [switch-base-class]="'bootstrap-switch'"
+                   [switch-wrapper-class]="'bootstrap-switch-wrapper'"
+                   [switch-off-text]="getNo()"
+                   [switch-on-text]="getYes()"
+                   [switch-on-color]="'success'"
+                   [switch-off-color]="'default'"
+                   [switch-size]="'small'"
+                   [switch-disabled]="false"
+                   [switch-readonly]="false"
+                   [switch-animate]="true"
+                   [switch-inverse]="false"
+                   [switch-handle-width]="50"
+                   [(ngModel)]="billByEmail"
+                   [ngModelOptions]="{standalone: true}"
+                   (onChangeState)="onBillByEmailChange($event)">
+          </bSwitch>
+        </div>
+          <div class="row row-switch" *ngIf="billByEmail && isShowing(1)">
+            <label class="label-switch">{{ 'to' | translate }}</label>
+            <input class="input-email" id="billEmail" type="text" formControlName="billEmail" [(ngModel)]="billEmail" (click)="onInputClick($event, 1)" />
+          </div>
+      </div>
+
+      <div class="col-sm-6">
+
+        <div class="row" *ngIf="isShowing(2)">
+          <div class="col-xs-12">
+            <label>{{ 'nameCard' | translate }}</label>
+            <input class="form-control" id="cardName"  formControlName="cardName" type="text" (click)="onInputClick($event, 2)" />
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isShowing(3)">
+          <div class="col-xs-12">
+            <label>{{ 'numberCard' | translate }}</label>
+            <input class="form-control" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" id="cardNo" formControlName="cardNo" maxlength="16" type="text" (click)="onInputClick($event, 3)" />
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isShowing(4)">
+          <div class="col-xs-8">
+            <label>{{ 'expDate' | translate }}</label>
+          </div>
+          <div class="col-xs-4">
+            <label>{{ 'cvv' | translate }}</label>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="isShowing(4)">
+          <div class="col-xs-8">
+            <input class="form-control card-exp" id="expMonth" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="2" formControlName="expMonth" type="text" (click)="onInputClick($event, 4)" /> /
+            <input class="form-control card-exp" id="expYear" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" maxlength="2" formControlName="expYear" type="text" (click)="onInputClick($event, 4)" />
+          </div>
+          <div class="col-xs-4">
+            <input class="form-control" id="cvv" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" formControlName="cvv" maxlength="3" type="text" (click)="onInputClick($event, 4)" />
+          </div>
+        </div>
+
+        <!-- <div [hidden]="!isTermsAndConditions" class="row">
+          <label>
+            <input class="form-control" formControlName="termsCondition" id="termsCondition" type="checkbox" id="checkbox" (change)="toggleEditable($event)" 
+            style="width: 13px;margin-top: 10px;margin-left: 15px;" /> {{'please_accept' | translate }}
+            <span style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()">{{'termsAndConditions' | translate }}</span>
+          </label>
+    
+        </div> -->
+        <div [hidden]="checkVisibility('isTermsAndConditions')" class="col-xs-12">
+          <div class="form-inline">
+            <input class="form-control" formControlName="termsCondition"  id="termsCondition" [checked]="this.stateService.termsCondition" type="checkbox" id="checkbox" (change)="toggleEditable($event)"
+              style="width: 15px;margin-left: 15px;" /> 
+            <label>{{'please_accept' | translate }}</label>
+            <label style="color: #e7e417;cursor: pointer;" (click)="onTermsAndCondClick()" onmouseover="">
+              {{'termsAndConditions' | translate }}
+            </label>
+          </div>
+        </div>
+    
+        <div [hidden]="checkVisibility('isAccept1')" class="col-xs-12">
+          <div class="form-inline">
+            <input class="form-control" id="Accept1" [checked]="this.stateService.Accept1" (change)="toggleEditable($event)" type="checkbox" style="width: 15px; margin-left: 15px;" /> 
+            <label>{{'Accept1' | translate }}</label>
+          </div>
+        </div>
+    
+        <div [hidden]="checkVisibility('isAccept2')" class="col-xs-12">
+          <div class="form-inline">
+            <input class="form-control" id="Accept2" [checked]="this.stateService.Accept2" (change)="toggleEditable($event)"  type="checkbox" style="width: 15px; margin-left: 15px;" /> 
+            <label>{{'Accept2' | translate }}</label>
+          </div>
+        </div>
+    
+        <div [hidden]="checkVisibility('isAccept3')" class="col-xs-12">
+          <div class="form-inline">
+            <input class="form-control" id="Accept3" [checked]="this.stateService.Accept3" (change)="toggleEditable($event)" type="checkbox" style="width: 15px; margin-left: 15px;" />
+            <label>{{'Accept3' | translate }}</label>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+    </div>
+
+    <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+      {{ 'btnNextPayment' | translate }}
+    </button>
+
+  </div>
+</form>
+<app-page-footer></app-page-footer>

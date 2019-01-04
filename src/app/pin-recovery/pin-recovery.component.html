@@ -1,0 +1,64 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="pinRecoveryForm">
+  <div class="container-fluid nci-content">
+    <div class="col-xs-4"></div>
+   
+      <p>
+        {{ 'enterPinRecoveryDetails' | translate }}
+      </p>
+    
+    <div class="row" *ngIf="isShowing(1) ">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4">
+        <label>{{ 'bookingNumber' | translate }}</label>
+        <input class="form-control" id="reservationCode" formControlName="reservationCode" type="text" (click)="onInputClick($event,1)" />
+      </div>
+
+    </div>
+    <div class="row" *ngIf="isShowing(2)">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4">
+        <label>{{ 'roomNumber' | translate }}</label>
+        <select class="form-control" formControlName="roomCode">
+          <option value="">-- Select a Room --</option>
+          <option [value]="room" *ngFor="let room of this.roomList">
+            {{room}}
+          </option>
+        </select>
+
+        <!-- <input class="form-control" id="roomCode" formControlName="roomCode" type="text" (click)="onInputClick($event,2)" /> -->
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(3)">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4">
+        <label>{{ 'booking_password' | translate }}</label>
+        <input class="form-control" id="pass" formControlName="pass" type="text" (click)="onInputClick($event,3)" />
+      </div>
+    </div>
+    <div class="row" *ngIf="isShowing(4) && this.recoveredPin">
+      <div class="col-xs-4"></div>
+      <div class="col-xs-4"><br/><br/>
+        <label style="font-size: 20px;">{{ 'recovered_booking_pin' | translate }}  </label>
+        <label style="color:red;font-size: 25px;" class="important">{{ this.recoveredPin }}</label>
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(5)">
+      <div class="col-xs-3"></div>
+      <div class="error" *ngIf="isError">{{ 'noAllPinRecoveryData' | translate }}</div>
+    </div>
+
+    <div class="row">
+      <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+    </div>
+
+    <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+      {{nextCaption}}
+    </button>
+  </div>
+</form>
+
+<app-page-footer></app-page-footer>

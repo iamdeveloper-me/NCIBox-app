@@ -1,0 +1,14 @@
+<div class="nci-header">
+    <h1>{{ 'termsAndConditions' | translate }}</h1>
+    <div class="curr-time">
+        {{ date }}
+    </div>
+</div>
+<hr class="nci-hr" />
+<div [innerHTML]="this.stateService.termsAndConditions" ></div>
+
+<div class="col-xs-12 btnStyle">
+    <button back class="btn btn-primary" type="button" (click)="onAcceptClick()">
+            {{ 'i_accept' | translate }}
+    </button>
+</div>

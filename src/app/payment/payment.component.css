@@ -1,0 +1,41 @@
+input {
+  width: 100%;
+}
+
+.input-email {
+  width:80%;
+}
+
+label {
+  font-size: 14px;
+  margin: 0;
+}
+
+.card-exp {
+  width: 46%;
+  display: inline;
+  text-align: center;
+}
+
+.align-right {
+  text-align:right;
+  margin-bottom: 0;
+  font-size:calc(12px + 0.5vh)
+}
+
+hr {
+  margin:0;
+}
+
+.payment-column {
+  margin-top:10px;
+  padding-left:40px;
+}
+
+.amount {
+  color: red;
+  font-weight:bolder;
+  font-size:calc(16px + 0.5vh);
+}
+
+

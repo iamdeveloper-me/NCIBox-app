@@ -1,0 +1,36 @@
+p {
+  padding-right:0;
+}
+
+.smaller {
+  font-size:calc(12px + 0.5vh);
+}
+
+.emphasized {
+  font-weight:bold;
+}
+
+ul {
+  margin-left:30px;
+}
+
+li {
+  font-size: calc(12px + 0.5vh);
+}
+
+.important {
+  color: red;
+  font-weight: bold;
+  font-size: calc(12px + 0.5vh);
+  text-align: center;
+}
+.date {
+  color: red;
+  font-weight: bold;
+  font-size: calc(12px + 0.5vh);
+  text-align: center;
+}
+.mail_btn{
+  color: #5cb85c;
+}
+

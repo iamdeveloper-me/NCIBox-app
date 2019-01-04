@@ -1,0 +1,28 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<div class="container-fluid nci-content">
+  <p>
+    {{ 'when' | translate }}
+  </p>
+  <div class="error" *ngIf="isError">{{ 'checkInDateReq' | translate }}</div>
+  <br>
+
+  <div class="row dateform">
+    <div (click)="onStartCalendarClick()" class="col-sm-4">
+      <label for="check-in">{{ 'checkIn' | translate }}</label>
+      <my-date-picker [selector]="selector" [options]="datePickerOptions" [selDate]="startDate" (dateChanged)="onCheckInDateChange($event)"></my-date-picker>
+    </div>
+
+    <div (click)="onStartCalendarSecondClick()" class="col-sm-4">
+      <label for="check-out">{{ 'checkOut' | translate }}</label>
+      <my-date-picker [options]="datePickerOptions" [selector]="selectorSecond" [selDate]="selectedDate" [disabled]="!checkInMoreNights" (dateChanged)="onCheckOutDateChange($event)"></my-date-picker>
+    </div>
+  </div>
+   
+
+  <button type="button" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+    {{ 'btnNextDates' | translate }}
+  </button>
+</div>
+
+<app-page-footer></app-page-footer>

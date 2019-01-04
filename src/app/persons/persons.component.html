@@ -1,0 +1,38 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<div class="container-fluid nci-content">
+
+  <p>
+    {{'guestsNumber' | translate }}
+  </p>
+  <br>
+
+  <div class="row personform">
+    <div class="col-sm-6">
+      <label for="adults">{{'adults' | translate }}</label>
+      <div>
+        <button class="number-button" type="button" (click)="decAdults()">-</button>
+        <input id="adults" type="text" [(ngModel)]="adults" readonly />
+        <button class="number-button" type="button" (click)="incAdults()">+</button>
+      </div>
+    </div>
+
+    <div class="col-sm-6">
+      <label for="children">{{'children' | translate }}</label>
+      <div>
+        <button class="number-button" type="button" (click)="decChildren()">-</button>
+        <input id="children" type="text" [(ngModel)]="children" readonly />
+        <button class="number-button" type="button" (click)="incChildren()">+</button>
+      </div>
+    </div>
+  </div>
+
+
+  <button type="button" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+    {{'btnNextPersons' | translate }}
+  </button>
+
+
+</div>
+
+<app-page-footer></app-page-footer>

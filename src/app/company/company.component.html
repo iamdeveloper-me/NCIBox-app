@@ -1,0 +1,88 @@
+<app-page-header [title]="headerTitle"></app-page-header>
+
+<form [formGroup]="companyForm">
+  <div class="container-fluid nci-content">
+    <p>
+      {{ 'enterCompanyDetails' | translate }}
+    </p>
+    <div class="error" *ngIf="isError">{{ 'noAllCompanyData' | translate }}</div>
+
+    <div class="row" *ngIf="isShowing(1)">
+      <div class="col-xs-8">
+        <label>{{ 'companyName' | translate }}</label>
+        <input class="form-control" id="companyName" formControlName="companyName" type="text" (click)="onInputClick($event, 1)" />
+      </div>
+      <div class="col-xs-4">
+        <label>{{ 'companyVatId' | translate }}</label>
+        <input class="form-control" id="companyVatId" formControlName="companyVatId" type="text" (click)="onInputClick($event, 1)" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(2)">
+      <div class="col-xs-12">
+        <label>{{ 'companyAddress' | translate }}</label>
+        <input class="form-control" id="companyAddress" formControlName="companyAddress" type="text" (click)="onInputClick($event,2)" />
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(3)">
+      <div class="col-xs-4">
+        <label>{{ 'companyPostCode' | translate }}</label>
+        <input class="form-control" id="companyPostCode" formControlName="companyPostCode" type="text" (click)="onInputClick($event,3)" />
+      </div>
+      <div class="col-xs-4">
+        <label>{{ 'companyCity' | translate }}</label>
+        <input class="form-control" id="companyCity" formControlName="companyCity" type="text" (click)="onInputClick($event,3)" />
+      </div>
+      <div class="col-xs-4">
+        <label>{{ 'companyCountry' | translate }}</label>
+        <div class="input-group">
+          <input class="form-control" formControlName="companyCountry" readonly="readonly" />
+          <span class="input-group-addon" onclick="document.getElementById('id01').style.display='block'" style="cursor:pointer">{{ 'selectLang' | translate }}</span>
+        </div>
+        <!-- <select class="form-control" value="Germany" formControlName="companyCountry">
+          <option value="">-- Select a Country --</option>
+          <option [value]="country" *ngFor="let country of this.countryService.Countries">
+            {{country}}
+          </option>
+        </select> -->
+      </div>
+    </div>
+
+    <div class="row" *ngIf="isShowing(4)">
+      <p class="optional">
+        {{ 'companyOptional' | translate }}
+      </p>
+      <div class="col-xs-6">
+        <label> {{ 'companyEmail' | translate }}</label>
+        <input class="form-control" id="companyEmail" formControlName="companyEmail" type="text" (click)="onInputClick($event,4)" />
+      </div>
+      <div class="col-xs-6">
+        <label>{{ 'companyMobile' | translate }}</label>
+        <div class="input-group">
+          <span class="input-group-addon">+</span>
+          <input class="form-control" id="companyMobile" maxlength="25" formControlName="companyMobile" onkeypress="return (event.charCode >= 48 && event.charCode <= 57)" type="text" autocomplete="off" (click)="onInputClick($event,4)" />
+        </div> 
+        
+      </div>
+    </div>
+
+    <div class="row">
+      <app-keyboard [onGetFocused]="getFocused.bind(this)" [onNewValue]="onNewValue.bind(this)" *ngIf="isKeyboard"></app-keyboard>
+    </div>
+
+    <button type="button" *ngIf="!isKeyboard" class="nci-btn-next nci-btn-highlight" (click)="onNextClick()">
+      {{ 'btnNextCompany' | translate }}
+    </button>
+  </div>
+</form>
+
+<app-page-footer></app-page-footer>
+
+<div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+        <button class="btn lang_btn" *ngFor="let country of this.countryService.Countries" (click)="setCountry(country)"> {{country}} </button>
+      </div>
+    </div>
+</div>
